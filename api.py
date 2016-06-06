@@ -29,7 +29,7 @@ def get_stock_stream(symbol, params={}):
     """ gets stream of messages for given symbol
     """
     all_params = ST_BASE_PARAMS.copy()
-    for k, v in params.iteritems():
+    for k, v in params.items(): # python 2.x is using iteritems , python 3.x is using items. 
         all_params[k] = v
     return R.get_json(ST_BASE_URL + 'streams/symbol/{}.json'.format(symbol), params=all_params)
 

@@ -65,3 +65,12 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+#MacBook file
+.DS_Store
+
+# yaml file
+*.yaml
+
+# txt file
+*.txt

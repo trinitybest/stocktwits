@@ -13,12 +13,18 @@ except:
 
 # Try to import requests just in case
 try:
+    import json
     import requests
 except:
     pass
+import yaml # To hide my ST_ACCESS_TOKEN
 
+# Open yaml file
+with open("keys.yaml", 'r') as f:
+    keys = yaml.load(f)
 
 # StockTwits details
+os.environ["ST_ACCESS_TOKEN"] = keys["ST_ACCESS_TOKEN"]
 ST_BASE_URL = 'https://api.stocktwits.com/api/2/'
 ST_BASE_PARAMS = dict(access_token=os.getenv('ST_ACCESS_TOKEN'))
 
@@ -36,7 +42,7 @@ class Requests():
             try:
                 resp = requests.get(url, params=params, timeout=5)
             except requests.Timeout:
-                trimmed_params = {k: v for k, v in params.iteritems() if k not in ST_BASE_PARAMS.keys()}
+                trimmed_params = {k: v for k, v in params.items() if k not in ST_BASE_PARAMS.keys()}
                 log.error('GET Timeout to {} w/ {}'.format(url[len(ST_BASE_URL):], trimmed_params))
             if resp is not None:
                 break
@@ -44,8 +50,8 @@ class Requests():
             log.error('GET loop Timeout')
             return None
         else:
-            return json.loads(resp.content)
-
+            return json.loads(resp.content.decode()) # Decode binary str to normal str.
+            
     def post_json(url, params=None, deadline=30):
         """ Tries to post a couple times in a loop before giving up if a timeout.
         """
