@@ -8,9 +8,3 @@ if __name__ == "__main__":
 	#print(type(AAPL_json))
 	print(AAPL_json)
 	with open('test.txt', 'w') as f:
-		f.write(str(AAPL_json))
-
-			.DS_Store
-	keys.yaml
-	startCrawling.py
-	test.txt
