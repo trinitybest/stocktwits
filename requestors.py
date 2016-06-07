@@ -24,7 +24,7 @@ with open("keys.yaml", 'r') as f:
     keys = yaml.load(f)
 
 # StockTwits details
-os.environ["ST_ACCESS_TOKEN"] = keys["ST_ACCESS_TOKEN"]
+os.environ["ST_ACCESS_TOKEN"] = keys["ST_ACCESS_TOKEN"] # set to your own ACCESS_TOKEN
 ST_BASE_URL = 'https://api.stocktwits.com/api/2/'
 ST_BASE_PARAMS = dict(access_token=os.getenv('ST_ACCESS_TOKEN'))
 
